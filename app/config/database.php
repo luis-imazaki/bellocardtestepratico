@@ -21,7 +21,7 @@ class Database {
 
         $envFile = __DIR__ . '/../../.env';
 
-        if (is_file($envFile)) {
+        if (is_file($envFile)){
             // lê o arquivo .env linha por linha, ignorando linhas vazias e comentários
             $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
@@ -64,15 +64,15 @@ class Database {
     }
 
     // método auxiliar para obter o valor de uma variável de ambiente, com um valor padrão caso não exista
-    private static function getEnvValue(string $key, string $default): string {
+    private static function getEnvValue(string $key, string $default): string{
         // caso a variável de ambiente esteja definida no array $_ENV e não seja uma string vazia, retorna o valor dela
-        if (array_key_exists($key, $_ENV) && $_ENV[$key] !== '') {
+        if (array_key_exists($key, $_ENV) && $_ENV[$key] !== ''){
             return $_ENV[$key];
         }
 
         // caso a variável de ambiente esteja definida no sistema operacional e não seja uma string vazia, retorna o valor dela
         $value = getenv($key);
-        if ($value !== false && $value !== '') {
+        if ($value !== false && $value !== ''){
             return $value;
         }
         
@@ -81,10 +81,10 @@ class Database {
     }
 
     // metodo para obter a conexão com o banco de dados
-    public static function getConnection(): PDO {
+    public static function getConnection(): PDO{
         self::loadConfig();
 
-        if (self::$conexao === null) {
+        if (self::$conexao === null){
             // DSN é a string de conexão que contém informações sobre o banco de dados
             $dsn = 'pgsql:host=' . self::$host
                 . ';port=' . self::$port
