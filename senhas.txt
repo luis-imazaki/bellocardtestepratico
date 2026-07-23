@@ -1,0 +1,21 @@
+Olá Manoel, para a execução desse teste prático, eu optei por utilizar variáveis de ambiente, para a segurança de
+credênciais do banco de dados.
+Usei o .env por conta que deixar senhas, portas e usuários escritos diretamente nos arquivos PHP é considerado
+uma vulnerabilidade de segurança, por conta que se alguém fizer um commit errado para algum repositório, como
+o Github, seria um sério problema. A classe Database.php foi construída para ler dinamicamente um arquivo oculto
+chamado ".env".
+
+Como testar o projeto:
+    1. Na raiz do projeto crie um arquivo chamado exatamente .env (deixei um arquivo de exemplo ou você pode criar
+    do zero)
+    2. Preencher o arquivo com as informações de conexão do seu servidor PostgreSQL local, utilizando a seguinte
+    estrutura:
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_NAME=bellocard
+    DB_USER=postgres
+    DB_PASSWORD=sua_senha_aqui
+
+Com isso, o sistema fará  conexão com o PostgreSQL automaticamente via PDO. O script SQL para a criação e popular
+a tabela estão na pasta ./scriptsbd/
+Qualquer dúvida durante a avaliação, estou à disposição!

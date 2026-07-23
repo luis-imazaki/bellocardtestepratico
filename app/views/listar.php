@@ -15,7 +15,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Data de Nascimento</th>
@@ -26,7 +25,6 @@
                 <tbody>
                     <?php foreach ($usuarios as $usuario): ?>
                         <tr>
-                            <td><?= htmlspecialchars($usuario['id']) ?></td>
                             <td><?= htmlspecialchars($usuario['nome']) ?></td>
                             <td><?= htmlspecialchars($usuario['cpf']) ?></td>
                             <td><?= htmlspecialchars($usuario['data_nascimento']) ?></td>
