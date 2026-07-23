@@ -136,6 +136,7 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
                         option.textContent = cidade.nome;
                         if(normalizarNomeCidade(cidade.nome) === normalizarNomeCidade(cidadeSelecionada)){
                             option.selected = true;
+                            selectCidade.setCustomValidity(''); // limpar a mensagem de erro do select de cidade
                         }
                         selectCidade.appendChild(option);
                     })
@@ -162,6 +163,7 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
                         if(!dados.erro){
                             document.getElementById('endereco').value = `${dados.logradouro}, ${dados.bairro}`;
                             selectEstado.value = dados.uf;
+                            selectEstado.setCustomValidity(''); // limpar a mensagem de erro do select de estado
 
                             // forcar o recarregamento das cidades para o novo estado e selecionar a cidade do CEP
                             carregarCidades(dados.uf, dados.localidade);
