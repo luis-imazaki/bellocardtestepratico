@@ -27,6 +27,9 @@ switch ($acao) {
     case 'deletar':
         $controller->deletar();
         break;
+    case 'ver':
+        $controller->ver();
+        break;
     default:
         $controller->listar(); // ação padrão é listar usuários
         break;

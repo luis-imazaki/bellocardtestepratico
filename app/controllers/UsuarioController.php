@@ -4,7 +4,7 @@ class UsuarioController {
     
     private Usuario $usuarioModel;
 
-    public function __construct($db){
+    public function __construct(){
         $db = Database::getConnection(); // obtém a conexão com o banco de dados
         $this->usuarioModel = new Usuario($db); // instancia o modelo Usuario com a conexão do banco de dados
     }
@@ -26,7 +26,7 @@ class UsuarioController {
             'cidade' => '',
             'estado' => ''
         ];
-        require __DIR__ . '/../views/criar.php';
+        require __DIR__ . '/../views/form.php';
     }
 
     public function salvar(){
@@ -68,5 +68,21 @@ class UsuarioController {
         }
         header('Location: index.php?acao=listar'); // redireciona para a lista de usuários
         exit;
+    }
+
+    public function ver(){
+        $id = $_GET['id'] ?? null;
+        if ($id !== null){
+            $usuario = $this->usuarioModel->buscarPorId((int)$id);
+            if ($usuario){
+                require __DIR__ . '/../views/visualizar.php';
+            }else{
+                header('Location: index.php?acao=listar');
+                exit;
+            }
+        } else{
+                header('Location: index.php?acao=listar'); 
+                exit;
+            }
     }
 }
