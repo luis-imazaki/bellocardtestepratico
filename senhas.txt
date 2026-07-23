@@ -6,8 +6,8 @@ o Github, seria um sério problema. A classe Database.php foi construída para l
 chamado ".env".
 
 Como testar o projeto:
-    1. Na raiz do projeto crie um arquivo chamado exatamente .env (deixei um arquivo de exemplo ou você pode criar
-    do zero)
+    1. Na raiz do projeto crie um arquivo chamado exatamente .env (deixei um arquivo de exemplo, você apenas precisa
+    renomeá-lo de ".env-example" para ".env" ou você pode criar do zero)
     2. Preencher o arquivo com as informações de conexão do seu servidor PostgreSQL local, utilizando a seguinte
     estrutura:
     DB_HOST=localhost

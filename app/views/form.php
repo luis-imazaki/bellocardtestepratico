@@ -22,15 +22,15 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
             <div class="row g-3">
                 <div class="col-md-12">
                     <label class="form-label">Nome Completo *</label>
-                    <input type="text" id="nome" name="nome" class="form-control" required maxlength="100" placeholder="Digite o nome completo" value="<?= htmlspecialchars($dados['nome'] ?? '') ?>">
+                    <input type="text" id="nome" name="nome" class="form-control" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required maxlength="100" placeholder="Digite o nome completo" value="<?= htmlspecialchars($dados['nome'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">CPF *</label>
-                    <input type="text" id="cpf" name="cpf" class="form-control" required maxlength="14" placeholder="000.000.000-00" value="<?= htmlspecialchars($dados['cpf'] ?? '') ?>">
+                    <input type="text" id="cpf" name="cpf" class="form-control" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required maxlength="14" placeholder="000.000.000-00" value="<?= htmlspecialchars($dados['cpf'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Data de Nascimento *</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" placeholder="Digite sua data de nascimento" required value="<?= htmlspecialchars($dados['data_nascimento'] ?? '') ?>">
+                    <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" placeholder="Digite sua data de nascimento" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required value="<?= htmlspecialchars($dados['data_nascimento'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Email</label>
@@ -50,13 +50,13 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Estado *</label>
-                    <select id="estado" name="estado" class="form-select" required>
+                    <select id="estado" name="estado" class="form-select" oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" onchange="this.setCustomValidity('')" required>
                         <option value="">Selecione...</option>
                     </select>
                 </div>
                 <div class="col-md-8">
                     <label class="form-label">Cidade *</label>
-                    <select id="cidade" name="cidade" class="form-select" required>
+                    <select id="cidade" name="cidade" class="form-select" oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" onchange="this.setCustomValidity('')" required>
                         <option value="">Selecione um estado primeiro</option>
                     </select>
                 </div>
