@@ -22,41 +22,69 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
             <div class="row g-3">
                 <div class="col-md-12">
                     <label class="form-label">Nome Completo *</label>
-                    <input type="text" id="nome" name="nome" class="form-control" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required maxlength="100" placeholder="Digite o nome completo" value="<?= htmlspecialchars($dados['nome'] ?? '') ?>">
+                    <input type="text" id="nome" name="nome" class="form-control" 
+                    oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  
+                    oninput="this.setCustomValidity('')" 
+                    required maxlength="100" 
+                    placeholder="Digite o nome completo" 
+                    value="<?= htmlspecialchars($dados['nome'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">CPF *</label>
-                    <input type="text" id="cpf" name="cpf" class="form-control" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required maxlength="14" placeholder="000.000.000-00" value="<?= htmlspecialchars($dados['cpf'] ?? '') ?>">
+                    <input type="text" id="cpf" name="cpf" class="form-control" 
+                    oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  
+                    oninput="this.setCustomValidity('')" 
+                    required minlength="14" maxlength="14"
+                    pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$"  
+                    placeholder="000.000.000-00" 
+                    value="<?= htmlspecialchars($dados['cpf'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Data de Nascimento *</label>
-                    <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" placeholder="Digite sua data de nascimento" oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  oninput="this.setCustomValidity('')" required value="<?= htmlspecialchars($dados['data_nascimento'] ?? '') ?>">
+                    <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" 
+                    placeholder="Digite sua data de nascimento" 
+                    oninvalid="this.setCustomValidity('Por favor, preencha este campo.')"  
+                    oninput="this.setCustomValidity('')" required 
+                    value="<?= htmlspecialchars($dados['data_nascimento'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control"  maxlength="100" placeholder="Digite o email" value="<?= htmlspecialchars($dados['email'] ?? '') ?>">
+                    <input type="email" id="email" name="email" class="form-control"  
+                    maxlength="100" 
+                    placeholder="Digite o email" 
+                    value="<?= htmlspecialchars($dados['email'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Telefone</label>
-                    <input type="text" id="telefone" name="telefone" class="form-control" maxlength="15" placeholder="(XX) 9XXXX-XXXX" value="<?= htmlspecialchars($dados['telefone'] ?? '') ?>">
+                    <input type="text" id="telefone" name="telefone" class="form-control" 
+                    pattern="^\(\d{2}\) \d{5}-\d{4}$" 
+                    minlength="14" maxlength="15" placeholder="(XX) 9XXXX-XXXX" 
+                    value="<?= htmlspecialchars($dados['telefone'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">CEP</label>
-                    <input type="text" id="cep" name="cep" class="form-control" maxlength="9" placeholder="00000-000">
+                    <input type="text" id="cep" name="cep" class="form-control" 
+                    maxlength="9" 
+                    placeholder="00000-000">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Endereço</label>
-                    <input type="text" id="endereco" name="endereco" class="form-control" maxlength="100" value="<?= htmlspecialchars($dados['endereco'] ?? '') ?>">
+                    <input type="text" id="endereco" name="endereco" class="form-control" 
+                    maxlength="100" value="<?= htmlspecialchars($dados['endereco'] ?? '') ?>">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Estado *</label>
-                    <select id="estado" name="estado" class="form-select" oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" onchange="this.setCustomValidity('')" required>
+                    <select id="estado" name="estado" class="form-select" 
+                    oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" 
+                    onchange="this.setCustomValidity('')" required>
                         <option value="">Selecione...</option>
                     </select>
                 </div>
                 <div class="col-md-8">
                     <label class="form-label">Cidade *</label>
-                    <select id="cidade" name="cidade" class="form-select" oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" onchange="this.setCustomValidity('')" required>
+                    <select id="cidade" name="cidade" class="form-select" 
+                    oninvalid="this.setCustomValidity('Por favor, selecione um item da lista.')" 
+                    onchange="this.setCustomValidity('')" required>
                         <option value="">Selecione um estado primeiro</option>
                     </select>
                 </div>
@@ -211,11 +239,17 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
         // mascara para Telefone
         document.getElementById('telefone').addEventListener('input', function(e){
             let valor = e.target.value.replace(/\D/g, '');
+
+            valor = valor.substring(0, 11);
             
             if(valor.length > 10){
                 valor = valor.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            }else{
-                valor = valor.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            } else if (valor.length > 6){
+                valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            } else if (valor.length > 2){
+                valor = valor.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+            } else if (valor.length > 0){
+                valor = valor.replace(/^(\d{0,2})/, '($1');
             }
 
             e.target.value = valor;
