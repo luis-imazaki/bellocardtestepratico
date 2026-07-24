@@ -150,16 +150,32 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
             carregarCidades(estadoSelecionado, cidadeSelecionada);
         }
 
+        let buscandoCep = false;
+        document.querySelector('form').addEventListener('submit', (e) => {
+            if(buscandoCep){
+                e.preventDefault();
+                alert('Aguarde a busca do CEP terminar antes de enviar o formulário.');
+            }
+        });
+
         document.getElementById('cep').addEventListener('input', (e) => {
             let cep = e.target.value.replace(/\D/g, '');
 
             let cepFormatado = cep.replace(/(\d{5})(\d)/, '$1-$2');
             e.target.value = cepFormatado;
             if(cep.length === 8){
+                buscandoCep = true;
                 document.getElementById('endereco').value = 'Carregando...';
+                
+                const btnSubmit = document.querySelector('form button[type="submit"]');
+                btnSubmit.disabled = true; // desabilitar o botão de submit enquanto busca o CEP
+
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(res => res.json())
                     .then(dados => {
+                        buscandoCep = false;
+                        btnSubmit.disabled = false; // habilitar o botão de submit após a busca do CEP
+
                         if(!dados.erro){
                             document.getElementById('endereco').value = `${dados.logradouro}, ${dados.bairro}`;
                             selectEstado.value = dados.uf;
@@ -172,6 +188,8 @@ $botao = $isEdicao ? 'Salvar Alterações' : 'Cadastrar';
                         }
                     })
                     .catch(()=>{
+                        buscandoCep = false;
+                        btnSubmit.disabled = false; // habilitar o botão de submit após a busca do CEP
                         document.getElementById('endereco').value = 'Erro ao buscar CEP';
                     });
             }
